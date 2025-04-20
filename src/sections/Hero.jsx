@@ -53,14 +53,14 @@ const Hero = () => {
                             <h1 className="hero-animate">with Precision and Care</h1>
                         </div>
 
-                        <p className="text-white-50 md:text-xl relative z-10 pointer-events-none hero-animate">
+                        <p className="text-white-50 md:text-xl relative z-10 pointer-events-none hero-animate max-w-4/6">
                             Pioneer in Digital Dentistry. First to embrace the latest  technology to deliver precisely crafted restorations.
                         </p>
 
                         <Button
                             className="md:w-80 md:h-16 w-60 h-12 hero-animate"
                             id="button"
-                            text="See our Work"
+                            text="Learn More"
                         />
                     </div>
                 </header>
