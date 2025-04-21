@@ -61,6 +61,7 @@ const Hero = () => {
                             className="md:w-80 md:h-16 w-60 h-12 hero-animate"
                             id="button"
                             text="Learn More"
+                            arrow={true}
                         />
                     </div>
                 </header>

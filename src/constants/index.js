@@ -1,19 +1,19 @@
 const navLinks = [
     {
-        name: "Work",
-        link: "#work",
+        name: "Showcase",
+        link: "#showcase",
     },
     {
-        name: "Experience",
-        link: "#experience",
-    },
-    {
-        name: "Skills",
-        link: "#skills",
+        name: "Partners",
+        link: "#partners",
     },
     {
         name: "Testimonials",
         link: "#testimonials",
+    },
+    {
+        name: "Gallery",
+        link: "gallery",
     },
 ];
 
@@ -37,38 +37,38 @@ const counterItems = [
 
 const logoIconsList = [
     {
-        imgPath: "/images/logos/company-logo-1.png",
+        imgPath: "/images/logos/ivoclar.png",
     },
     {
-        imgPath: "/images/logos/company-logo-2.png",
+        imgPath: "/images/logos/dentsply.png",
     },
     {
-        imgPath: "/images/logos/company-logo-3.png",
+        imgPath: "/images/logos/upcera.png",
     },
     {
-        imgPath: "/images/logos/company-logo-4.png",
+        imgPath: "/images/logos/dentaurum.png",
     },
-    {
-        imgPath: "/images/logos/company-logo-5.png",
-    },
-    {
-        imgPath: "/images/logos/company-logo-6.png",
-    },
-    {
-        imgPath: "/images/logos/company-logo-7.png",
-    },
-    {
-        imgPath: "/images/logos/company-logo-8.png",
-    },
-    {
-        imgPath: "/images/logos/company-logo-9.png",
-    },
-    {
-        imgPath: "/images/logos/company-logo-10.png",
-    },
-    {
-        imgPath: "/images/logos/company-logo-11.png",
-    },
+    // {
+    //     imgPath: "/images/logos/company-logo-5.png",
+    // },
+    // {
+    //     imgPath: "/images/logos/company-logo-6.png",
+    // },
+    // {
+    //     imgPath: "/images/logos/company-logo-7.png",
+    // },
+    // {
+    //     imgPath: "/images/logos/company-logo-8.png",
+    // },
+    // {
+    //     imgPath: "/images/logos/company-logo-9.png",
+    // },
+    // {
+    //     imgPath: "/images/logos/company-logo-10.png",
+    // },
+    // {
+    //     imgPath: "/images/logos/company-logo-11.png",
+    // },
 ];
 
 const abilities = [

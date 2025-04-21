@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Button = ({className,id,text}) => {
+const Button = ({className,id,text,arrow}) => {
     return (
         <a
             onClick={(e)=>{
@@ -17,7 +17,11 @@ const Button = ({className,id,text}) => {
                 <div className="bg-circle"></div>
                 <p className="text">{text}</p>
                 <div className="arrow-wrapper">
-                    <img src="/images/arrow-down.svg" alt="arrow" />
+                    {
+                        arrow ? <img src="/images/arrow-down.svg" alt="arrow" />
+                            : <img src="/images/arrow-down.svg" alt="arrow" className="rotate-[225deg]"/>
+
+                    }
                 </div>
 
             </div>
