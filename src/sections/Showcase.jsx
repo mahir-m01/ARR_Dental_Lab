@@ -17,22 +17,39 @@ const Showcase = () => {
                 <TitleHeader title="Our Work" />
             </div>
             <div className="w-full h-[60vh] md:h-[80vh] lg:h-[100vh] mt-0 mb-0">
-                <Canvas flat camera={{ fov: 25 }}>
+                <Canvas
+                    flat
+                    camera={{ fov: 25 }}
+                    dpr={[1, 1.5]} // Limit pixel density for better performance
+                    performance={{ min: 0.8 }} // Higher min performance threshold
+                    gl={{
+                        powerPreference: "high-performance",
+                        antialias: false, // Disable for better scroll performance
+                        stencil: false,
+                        depth: true
+                    }}
+                >
                     {!isTablet && (
                         <OrbitControls
                             enableZoom={false}
                             enablePan={true}
                             enableRotate={true}
+                            enableDamping={true}
+                            dampingFactor={0.03} // Reduced for smoother performance
+                            rotateSpeed={0.5} // Slower rotation = less GPU work
+                            maxPolarAngle={Math.PI * 0.75} // Limit vertical rotation
+                            minPolarAngle={Math.PI * 0.25}
                         />
                     )}
-                    <ambientLight />
+                    <ambientLight intensity={0.9} />
                     <Scene />
                     <EffectComposer>
                         <Bloom
                             mipmapBlur
                             intensity={3.0}
-                            luminanceThreshold={0}
-                            luminanceSmoothing={0}
+                            luminanceThreshold={0.1}
+                            luminanceSmoothing={0.1}
+                            levels={6} // Reduce bloom quality levels
                         />
                     </EffectComposer>
                 </Canvas>
