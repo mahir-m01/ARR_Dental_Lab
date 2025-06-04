@@ -18,11 +18,13 @@ const Showcase = () => {
             </div>
             <div className="w-full h-[60vh] md:h-[80vh] lg:h-[100vh] mt-0 mb-0">
                 <Canvas flat camera={{ fov: 25 }}>
-                    <OrbitControls
-                        enableZoom={false}
-                        enablePan={!isTablet}
-                        enableRotate={!isTablet}
-                    />
+                    {!isTablet && (
+                        <OrbitControls
+                            enableZoom={false}
+                            enablePan={true}
+                            enableRotate={true}
+                        />
+                    )}
                     <ambientLight />
                     <Scene />
                     <EffectComposer>

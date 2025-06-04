@@ -5,8 +5,11 @@ import HeroExperience from "../components/HeroModels/HeroExperience.jsx";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap/gsap-core";
 import AnimatedCounter from "../components/AnimatedCounter.jsx";
+import { useMediaQuery } from 'react-responsive';
 
 const Hero = () => {
+
+    const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
     const slideRef = useRef(null);
     const wrapperRef = useRef(null);
 
@@ -147,17 +150,19 @@ const Hero = () => {
 
                         <Button
                             className="md:w-80 md:h-16 w-60 h-12 hero-animate"
-                            id="button"
                             text="Learn More"
                             arrow={true}
+                            href="#counter"
                         />
                     </div>
                 </header>
-                <figure>
-                    <div className="hero-3d-layout">
-                        <HeroExperience/>
-                    </div>
-                </figure>
+                {!isTablet && (
+                    <figure>
+                        <div className="hero-3d-layout">
+                            <HeroExperience />
+                        </div>
+                    </figure>
+                )}
             </div>
             <AnimatedCounter/>
         </section>
