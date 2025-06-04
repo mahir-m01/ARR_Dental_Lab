@@ -3,7 +3,7 @@ import {useTexture} from "@react-three/drei"
 import * as THREE from "three"
 import { useFrame } from '@react-three/fiber'
 const Scene = () => {
-    const tex = useTexture("/public/images/ARR_Temp.png")
+    const tex = useTexture("/images/ARR_Temp.png")
     const frame = useRef(null)
     useFrame((state,delta)=>{
         frame.current.rotation.y += delta * 0.5

@@ -1,15 +1,14 @@
-import Hero from "./sections/Hero.jsx";
-import Showcase from "./sections/Showcase.jsx";
-import NavBar from "./components/NavBar.jsx";
-import LogoSection from "./components/LogoSection.jsx";
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import Gallery from './pages/gallery/Gallery.jsx';
+
 const App = () => {
     return (
-        <>
-            <NavBar/>
-            <Hero />
-            <Showcase/>
-            <LogoSection/>
-        </>
-    )
-}
-export default App
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/gallery" element={<Gallery />} />
+        </Routes>
+    );
+};
+
+export default App;

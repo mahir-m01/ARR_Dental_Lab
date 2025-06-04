@@ -1,22 +1,28 @@
 import React from 'react'
-import {Canvas} from "@react-three/fiber"
-import {OrbitControls} from "@react-three/drei"
-import {Bloom, EffectComposer, ToneMapping} from "@react-three/postprocessing"
-import Scene from '/src/components/Scene.jsx';
-import TitleHeader from "../components/TitleHeader.jsx";
-import Button from "../components/Button.jsx";
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls } from "@react-three/drei"
+import { Bloom, EffectComposer } from "@react-three/postprocessing"
+import { useMediaQuery } from 'react-responsive'
+
+import Scene from '/src/components/Scene.jsx'
+import TitleHeader from "../components/TitleHeader.jsx"
+import Button from "../components/Button.jsx"
 
 const Showcase = () => {
+    const isTablet = useMediaQuery({ query: '(max-width: 1024px)' })
 
     return (
-        <section id="showcase" className="w-full md:mt-40 mt-20 section-padding xl:px-0
-        scroll-mt-28">
+        <section id="showcase" className="w-full md:mt-40 mt-20 section-padding xl:px-0 scroll-mt-38">
             <div className="w-full max-h-full md:px-20 px-5">
-                <TitleHeader title="Our Work"/>
+                <TitleHeader title="Our Work" />
             </div>
-            <div className="w-full h-[60vh] md:h-[100vh] lg:h-[120vh] mt-0 mb-0">
+            <div className="w-full h-[60vh] md:h-[80vh] lg:h-[100vh] mt-0 mb-0">
                 <Canvas flat camera={{ fov: 25 }}>
-                    <OrbitControls enableZoom={false} />
+                    <OrbitControls
+                        enableZoom={false}
+                        enablePan={!isTablet}
+                        enableRotate={!isTablet}
+                    />
                     <ambientLight />
                     <Scene />
                     <EffectComposer>
@@ -35,11 +41,10 @@ const Showcase = () => {
                     id="button"
                     text="View More"
                     arrow={false}
+                    href="/gallery"
                 />
             </div>
         </section>
-
-
     )
 }
 

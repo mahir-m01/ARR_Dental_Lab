@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import {words} from "../constants/index.js";
 import Button from "../components/Button.jsx";
 import HeroExperience from "../components/HeroModels/HeroExperience.jsx";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap/gsap-core";
 import AnimatedCounter from "../components/AnimatedCounter.jsx";
+
 const Hero = () => {
+    const slideRef = useRef(null);
+    const wrapperRef = useRef(null);
 
     useGSAP(()=>{
+        // Original hero animation
         gsap.fromTo(".hero-animate",
             {
                 y:50,
                 opacity:0,
-
             },
             {
                 y:0,
@@ -24,8 +27,83 @@ const Hero = () => {
         )
     })
 
+    // GSAP Text Slider Animation
+    useGSAP(() => {
+        // Animation configuration - customize these values
+        const animationConfig = {
+            transitionDuration: 1.2,
+            pauseDuration: 1,
+            initialDelay: 0.3,
+            ease: "power2.inOut"
+        };
+
+        if (!wrapperRef.current || !slideRef.current) return;
+
+        const wrapper = wrapperRef.current;
+        const items = wrapper.children;
+
+        if (items.length === 0) return;
+
+        // Get the height of each item dynamically
+        const getItemHeight = () => {
+            return items[0].offsetHeight;
+        };
+
+        const createSliderAnimation = () => {
+            const itemHeight = getItemHeight();
+            const totalItems = items.length;
+
+            // Create timeline
+            const tl = gsap.timeline({
+                repeat: -1,
+                ease: animationConfig.ease
+            });
+
+            // Add initial delay
+            tl.to({}, { duration: animationConfig.initialDelay });
+
+            // Animate through each item
+            for (let i = 0; i < totalItems; i++) {
+                tl.to(wrapper, {
+                    y: -itemHeight * i,
+                    duration: animationConfig.transitionDuration,
+                    ease: animationConfig.ease
+                })
+                    .to({}, { duration: animationConfig.pauseDuration }); // Pause between transitions
+            }
+
+            // Return to start
+            tl.to(wrapper, {
+                y: 0,
+                duration: animationConfig.transitionDuration,
+                ease: animationConfig.ease
+            });
+
+            return tl;
+        };
+
+        // Initial animation
+        let animation = createSliderAnimation();
+
+        // Handle resize to recalculate heights
+        const handleResize = () => {
+            animation.kill();
+            gsap.set(wrapper, { y: 0 });
+            setTimeout(() => {
+                animation = createSliderAnimation();
+            }, 100);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            animation.kill();
+        };
+    }, [words]);
+
     return (
-        <section id="hero" className="relative overflow-hidden">
+        <section id="hero" className="relative overflow-hidden md:pt-18 lg:pt-24 xl:pt-0">
             <div className="absolute top-0 left-0 z-10">
                 <img src="/images/bg.png" alt="background"/>
             </div>
@@ -33,17 +111,27 @@ const Hero = () => {
                 <header className="flex flex-col justify-center mid:w-full w-screen md:px-20 px-5">
                     <div className="flex flex-col gap-7">
                         <div className="hero-text">
-                            <h1 className="hero-animate">Shaping
-                                <span className="slide">
-                                    <span className="wrapper">
-                                        {words.map((word) => (
-                                            <span key={word.text} className="flex items-center md:gap-3 gap-1 pb-2">
-                                                 <img
+                            <h1 className="hero-animate">
+                                Sculpting<span className="xl:ml-3 lg:ml-2 md:ml-1"></span>
+                                <span
+                                    className="slide-gsap"
+                                    ref={slideRef}
+                                >
+                                    <span
+                                        className="wrapper-gsap"
+                                        ref={wrapperRef}
+                                    >
+                                        {words.map((word, index) => (
+                                            <span
+                                                key={`${word.text}-${index}`}
+                                                className="flex items-center md:gap-3 gap-1  pb-2 slider-item"
+                                            >
+                                                <img
                                                     src={word.imgPath}
                                                     alt={word.text}
-                                                    className="xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50"
-                                                 />
-                                                <span>{word.text}</span>
+                                                    className="xl:size-12 md:size-10 size-7 md:p-3 p-1 rounded-full bg-white-50 flex-shrink-0"
+                                                />
+                                                <span className="whitespace-nowrap">{word.text}</span>
                                             </span>
                                         ))}
                                     </span>
@@ -54,7 +142,7 @@ const Hero = () => {
                         </div>
 
                         <p className="text-white-50 md:text-xl relative z-10 pointer-events-none hero-animate max-w-4/6">
-                            Pioneer in Digital Dentistry. First to embrace the latest  technology to deliver precisely crafted restorations.
+                            Pioneer in Digital Dentistry. First to embrace the latest technology to deliver precisely crafted restorations.
                         </p>
 
                         <Button
@@ -75,4 +163,5 @@ const Hero = () => {
         </section>
     )
 }
+
 export default Hero
