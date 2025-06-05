@@ -1,7 +1,7 @@
 import React from 'react';
 import { logoIconsList } from "../constants/index.js";
 import TitleHeader from "../components/TitleHeader.jsx";
-
+import {useTheme} from "../contexts/ThemeContext.jsx";
 const LogoIcon = ({ icon }) => {
     return (
         <div className="flex-none flex-center marquee-item">
@@ -11,6 +11,7 @@ const LogoIcon = ({ icon }) => {
 };
 
 const LogoSection = () => {
+    const {isDark} = useTheme();
     return (
         <section id="partners" className="scroll-mt-40">
             <div className="w-full max-h-full md:px-10 px-5 mt-32">
@@ -21,7 +22,7 @@ const LogoSection = () => {
                 <div className="gradient-edge"></div>
 
                 <div className="marquee h-44">
-                    <div className="marquee-box md:gap-20 gap-5 bg-zinc-900">
+                    <div className={`marquee-box md:gap-20 gap-5 ${isDark ? "bg-zinc-900" : "bg-teal-200/50"}`}>
                         {[...logoIconsList, ...logoIconsList].map((icon, idx) => (
                             <LogoIcon key={idx} icon={icon} />
                         ))}

@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import emailjs from '@emailjs/browser'
-
 import TitleHeader from "../components/TitleHeader";
+import {useTheme} from "../contexts/ThemeContext.jsx";
 
 const Contact = () => {
+    const {isDark} = useTheme();
     const formRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
@@ -43,14 +44,14 @@ const Contact = () => {
                     title="Get in Touch With Us"
                 />
                 <div className="mt-16">
-                    <div className="flex-center card-border rounded-xl p-10 w-full max-w-3xl mx-auto">
+                    <div className={`flex-center card-border rounded-xl p-10 w-full max-w-3xl mx-auto ${isDark ? "bg-transparent" : "bg-teal-200/50"}`}>
                         <form
                             ref={formRef}
                             onSubmit={handleSubmit}
-                            className="w-full flex flex-col gap-7"
+                            className="w-full flex flex-col gap-7 "
                         >
                             <div>
-                                <label htmlFor="name">Your name</label>
+                                <label htmlFor="name" className="text-[#079D9C]">Your Name</label>
                                 <input
                                     type="text"
                                     id="name"
@@ -63,7 +64,7 @@ const Contact = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="email">Your Email</label>
+                                <label htmlFor="email" className="text-[#079D9C]">Your Email</label>
                                 <input
                                     type="email"
                                     id="email"
@@ -76,7 +77,7 @@ const Contact = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="message">Your Message</label>
+                                <label htmlFor="message" className="text-[#079D9C]">Your Message</label>
                                 <textarea
                                     id="message"
                                     name="message"
@@ -94,9 +95,6 @@ const Contact = () => {
                                     <p className="text">
                                         {loading ? "Sending..." : "Send Message"}
                                     </p>
-                                    <div className="arrow-wrapper">
-                                        <img src="/images/arrow-down.svg" alt="arrow" />
-                                    </div>
                                 </div>
                             </button>
                         </form>

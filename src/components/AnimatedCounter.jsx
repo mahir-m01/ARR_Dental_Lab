@@ -4,8 +4,10 @@ import CountUp from "react-countup";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+import {useTheme} from "../contexts/ThemeContext.jsx";
 
 const AnimatedCounter = () => {
+    const {isDark} = useTheme();
     const countRef = useRef(null);
     const [startCounting, setStartCounting] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
@@ -38,10 +40,10 @@ const AnimatedCounter = () => {
             }`}
         >
             <div className="mx-auto grid-4-cols"> {/*Custom Classes*/}
-                {counterItems.map((item, index)=>(
+                {counterItems.map((item)=>(
                     <div
                         key={item.label}
-                        className="bg-zinc-900 rounded-lg p-10 flex flex-col justify-center"
+                        className={`${isDark ? "bg-zinc-900" : "bg-[#079D9C]"} rounded-lg p-10 flex flex-col justify-center`}
                     >
                         <div className="counter-number text-white text-5xl font-bold mb-2">
                             {

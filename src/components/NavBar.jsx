@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { navLinks } from "../constants/index.js";
 import { Link } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -20,7 +21,7 @@ const NavBar = () => {
                     <img
                         src="/images/arrlogo.png"
                         alt="logo"
-                        className="h-14 w-14 md:h-32 md:w-32 object-contain"
+                        className="h-18 w-18 md:h-32 md:w-32 object-contain"
                     />
                     ARR Dental Lab
                 </a>
@@ -45,11 +46,14 @@ const NavBar = () => {
                     </ul>
                 </nav>
 
-                <a href="#contact" className="contact-btn group">
-                    <div className="inner">
-                        <span>Contact us</span>
-                    </div>
-                </a>
+                <div className="flex items-center gap-3 md:gap-4">
+                    <ThemeToggle />
+                    <a href="#contact" className="contact-btn group">
+                        <div className="inner">
+                            <span>Contact us</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </header>
     );

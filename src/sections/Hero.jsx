@@ -1,30 +1,31 @@
 import React, { useEffect, useRef } from 'react'
-import {words} from "../constants/index.js";
+import { words } from "../constants/index.js";
 import Button from "../components/Button.jsx";
 import HeroExperience from "../components/HeroModels/HeroExperience.jsx";
-import {useGSAP} from "@gsap/react";
-import {gsap} from "gsap/gsap-core";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap/gsap-core";
 import AnimatedCounter from "../components/AnimatedCounter.jsx";
 import { useMediaQuery } from 'react-responsive';
+import {useTheme} from "../contexts/ThemeContext.jsx"; // Update the import path
 
 const Hero = () => {
-
+    const { isDark } = useTheme(); // Get theme state
     const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
     const slideRef = useRef(null);
     const wrapperRef = useRef(null);
 
-    useGSAP(()=>{
+    useGSAP(() => {
         // Original hero animation
         gsap.fromTo(".hero-animate",
             {
-                y:50,
-                opacity:0,
+                y: 50,
+                opacity: 0,
             },
             {
-                y:0,
-                opacity:1,
+                y: 0,
+                opacity: 1,
                 stagger: 0.2,
-                duration:1,
+                duration: 1,
                 ease: "power2.inOut"
             },
         )
@@ -108,7 +109,7 @@ const Hero = () => {
     return (
         <section id="hero" className="relative overflow-hidden md:pt-18 lg:pt-24 xl:pt-0">
             <div className="absolute top-0 left-0 z-10">
-                <img src="/images/bg.png" alt="background"/>
+                <img src="/images/bg.png" alt="background" />
             </div>
             <div className="hero-layout">
                 <header className="flex flex-col justify-center mid:w-full w-screen md:px-20 px-5">
@@ -127,12 +128,14 @@ const Hero = () => {
                                         {words.map((word, index) => (
                                             <span
                                                 key={`${word.text}-${index}`}
-                                                className="flex items-center md:gap-3 gap-1  pb-2 slider-item"
+                                                className="flex items-center md:gap-3 gap-1 pb-2 slider-item"
                                             >
                                                 <img
                                                     src={word.imgPath}
                                                     alt={word.text}
-                                                    className="xl:size-12 md:size-10 size-7 md:p-3 p-1 rounded-full bg-white-50 flex-shrink-0"
+                                                    className={`xl:size-12 md:size-10 size-7 md:p-3 p-1 rounded-full flex-shrink-0 ${
+                                                        isDark ? 'bg-[#CBFFFF]' : 'bg-teal-200/50'
+                                                    }`}
                                                 />
                                                 <span className="whitespace-nowrap">{word.text}</span>
                                             </span>
@@ -144,7 +147,7 @@ const Hero = () => {
                             <h1 className="hero-animate">with Precision and Care</h1>
                         </div>
 
-                        <p className="text-white-50 md:text-xl relative z-10 pointer-events-none hero-animate max-w-4/6">
+                        <p className={`${isDark ? 'text-white-50' : 'text-[#4A5568]'} md:text-xl relative z-10 pointer-events-none hero-animate max-w-4/6`}>
                             Pioneer in Digital Dentistry. First to embrace the latest technology to deliver precisely crafted restorations.
                         </p>
 
@@ -164,7 +167,7 @@ const Hero = () => {
                     </figure>
                 )}
             </div>
-            <AnimatedCounter/>
+            <AnimatedCounter />
         </section>
     )
 }

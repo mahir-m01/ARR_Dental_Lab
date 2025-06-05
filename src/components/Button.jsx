@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {useTheme} from "../contexts/ThemeContext.jsx";
 
 const Button = ({ className, id, text, arrow, href }) => {
+    const {isDark} = useTheme();
     const handleClick = (e) => {
         if (href && href.startsWith('#')) {
             e.preventDefault();
@@ -24,16 +26,8 @@ const Button = ({ className, id, text, arrow, href }) => {
     };
 
     const content = (
-        <div className="cta-button group">
-            <div className="bg-circle"></div>
+        <div className="cta-button">
             <p className="text">{text}</p>
-            <div className="arrow-wrapper">
-                {arrow ? (
-                    <img src="/images/arrow-down.svg" alt="arrow" />
-                ) : (
-                    <img src="/images/arrow-down.svg" alt="arrow" className="rotate-[225deg]" />
-                )}
-            </div>
         </div>
     );
 
